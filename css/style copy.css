@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(69, 28, 108);
+}
+
+h1{
+    color: white;
+    text-align: center;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container button{
+    padding: 3px 10px;
+    border-radius: 5px;
+    background-color: #653a88;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+footer{
+    margin-bottom: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
