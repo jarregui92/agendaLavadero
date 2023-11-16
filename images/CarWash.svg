@@ -8,16 +8,16 @@ viewBox="0 0 76885.02 57491.9"
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil2 {fill:#0096DC}
+    .fil2 {fill:#82bec7}
     .fil1 {fill:white}
-    .fil3 {fill:#FEFEFE;fill-rule:nonzero}
-    .fil4 {fill:#0071BD;fill-rule:nonzero}
+    .fil3 {fill:#1c565f;fill-rule:nonzero}
+    .fil4 {fill:#82bec7;fill-rule:nonzero}
     .fil0 {fill:url(#id0)}
    ]]>
   </style>
   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="38955.23" y1="19291.99" x2="38457" y2="46443.95">
-   <stop offset="0" style="stop-opacity:1; stop-color:#0096DC"/>
-   <stop offset="1" style="stop-opacity:1; stop-color:#006DBA"/>
+   <stop offset="0" style="stop-opacity:1; stop-color:#82bec7"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#1c565f"/>
   </linearGradient>
  </defs>
  <g id="Capa_x0020_1">
