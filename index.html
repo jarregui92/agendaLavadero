@@ -36,7 +36,7 @@
     </section>
 
     <section class="nosotros" id="nosotros">
-        <img src="./images/CarWash.svg" alt="Logo Empresa" width="200px">
+        <img src="./images/CarWash.svg" alt="Logo Empresa" width="12.5rem">
         <br>
         <p>"En nuestro auto lavado, nos especializamos en darle a tu vehículo el cuidado que se merece. Con servicios de
             alta calidad y atención personalizada, dejamos tu auto impecable, reluciente y listo para destacar en la
@@ -119,8 +119,9 @@
         </ul>
     </footer>
 
-    <div class="modal-section">
-        <section class="modal ">
+    <!-- MODAL PARA AGENDAR LA RESERVA -->
+    <div class="modal-section ">
+        <section class="modal hidden">
             <div class="flex">
                 <h3>Agenda tu lavado!</h3>
                 <button class="btn-close">⨉</button>
@@ -132,19 +133,20 @@
             </div>
 
             <form action="#" class="form-modal" method="post" id="agendaLavadoForm">
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre completo " required/>
-                <input type="number" id="telefono" name="telefono" placeholder="+598 99 999 999" required/>
-                <input type="datetime-local" name="fecha" id="fecha" required>
-                <select name="tipo" id="tipo" class="input">
-                    <option value="1">Camioneta</option>
-                    <option value="2">Auto</option>
-                    <option value="3">Moto</option>
+                <input type="text" id="inputNombre" name="inputNombre" placeholder="Nombre completo " required/>
+                <input type="number" id="inputTelefono" name="inputTelefono" placeholder="+598 99 999 999" required/>
+                <input type="date" name="inputFecha" id="inputFecha" required>
+                <label for="inputHora perror">Abierto de 9 a 18hs</label>
+                <input type="number" name="inputHora" id="inputHora" min="9" max="18" step="1"  value="9" required>
+                <select name="selectTipo" id="selectTipo" class="input">
+                    <!-- SE CARGA CON JAVASCRIPT -->
                 </select>
-                <p class="error-text hidden">Debes de completar los campos obligatorios (*)</p>
+                <p id ="pError" class="error-text hidden"></p>
                 <button type="submit" class="btn btn-submit" >Agendar</button>
             </form>
         </section>
     </div>
+
     <div class="overlay hidden"></div>
 
 </body>
