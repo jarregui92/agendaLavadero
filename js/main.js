@@ -230,14 +230,13 @@ let agendarLavado = function (event) {
 
 //ADMIN SECTION
 function adminCMDInfo() {
-    console.log("\x1b[1m===========================================================");
-    console.log("|                     ADMIN CMD                          |");
-    console.log("\x1b[1m===========================================================");
-    console.log("===========================================================");
-    console.log("|  \x1b[44mcomandos\x1b[0m             |  Lista de Comandos                 |");
-    console.log("|  \x1b[44mreservas\x1b[0m         |  Muestra la lista de reservas      |");
-    console.log("|  \x1b[44mclsReservas\x1b[0m      |  Remueve todas las reservas        |");
-    console.log("===========================================================");
+    console.log("\x1b[1m=========================================================");
+    console.log("|                     ADMIN CMD                         |");
+    console.log("=========================================================");
+    console.log("|  \x1b[32m'comandos'\x1b[0m         |  Lista de Comandos              |");
+    console.log("|  \x1b[32m'reservas'\x1b[0m         |  Muestra la lista de reservas   |");
+    console.log("|  \x1b[32m'clsReservas'\x1b[0m      |  Remueve todas las reservas     |");
+    console.log("=========================================================");
     console.log('Los comandos se ejecutan con adminCMD("comando")')
     
 }
