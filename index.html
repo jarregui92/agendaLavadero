@@ -7,12 +7,20 @@
     <meta name="description" content="Aplicacion de agenda de lavados de vehiculos">
     <link rel="icon" href="./images/CarWash.svg" type="image/x-icon">
     <title>Agenda Lavado Vehiculo</title>
+
+    <!-- CSS LINKS -->
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="./css/styles.css">
+
+    <!-- JS LINKS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="./js/main.js" defer></script>
     <script src="./js/modal.js" defer></script>
+    <script src="./js/validateHour.js" defer></script>
 
 </head>
 
@@ -36,7 +44,7 @@
     </section>
 
     <section class="nosotros" id="nosotros">
-        <img src="./images/CarWash.svg" alt="Logo Empresa" width="12.5rem">
+        <img src="./images/CarWash.svg" alt="Logo Empresa">
         <br>
         <p>"En nuestro auto lavado, nos especializamos en darle a tu vehículo el cuidado que se merece. Con servicios de
             alta calidad y atención personalizada, dejamos tu auto impecable, reluciente y listo para destacar en la
@@ -135,9 +143,11 @@
             <form action="#" class="form-modal" method="post" id="agendaLavadoForm">
                 <input type="text" id="inputNombre" name="inputNombre" placeholder="Nombre completo " required/>
                 <input type="number" id="inputTelefono" name="inputTelefono" placeholder="+598 99 999 999" required/>
-                <input type="date" name="inputFecha" id="inputFecha" required>
+                <label for="inputTelefono">Seleccione la fecha para su lavado</label>
+                <input type="text" id="datepicker" placeholder="Selecciona fecha">
+                <!-- <input type="date" name="inputFecha" id="inputFecha" required> -->
                 <label for="inputHora perror">Abierto de 9 a 18hs</label>
-                <input type="number" name="inputHora" id="inputHora" min="9" max="18" step="1"  value="9" required>
+                <select id="timepicker" disabled class="input"></select>
                 <select name="selectTipo" id="selectTipo" class="input">
                     <!-- SE CARGA CON JAVASCRIPT -->
                 </select>

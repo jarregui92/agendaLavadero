@@ -229,6 +229,11 @@ a .btn {
 
 /*nosotros Section*/
 
+.nosotros img{
+	width: 18rem;
+}
+
+
 .nosotros .grid li {
 	height: 350px;
 	padding: 20px;

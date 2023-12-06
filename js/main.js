@@ -105,6 +105,14 @@ document.addEventListener('DOMContentLoaded', function () {
             fecha: '2023-12-05',
             hora: 19,
             tipo: 2
+        },
+        {
+            id: 10,
+            cliente: 'Matías Peralta',
+            telefono: '+54−9−11−6543−2109',
+            fecha: '2023-12-06',
+            hora: 16,
+            tipo: 2
         }
     ]
 
@@ -138,8 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (listaReservasLocalStorage) {
         listaReservasArray = JSON.parse(listaReservasLocalStorage);
     } else {
-        let listaReservasString = JSON.stringify(reservasToLocalStorage);
-        localStorage.setItem('reservas', listaReservasString);
+        listaReservasArray = [];
     }
 
     //CARGA DEL SELECT DEL TIPO DE VEHICULO PARA LAVADO DEL MODAL
@@ -154,20 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    //Obtengo el input Date del Formulario
-    let inputFecha = document.getElementById('inputFecha');
-
-    //SE CREAN Y CARGAN LAS VARIABLES PARA CREAR UN RANGO DE FECHAS DE 1 MES
-    //SOLO SE PERMITE AGENDAR 30 DIAS ADELANTE HOY INCLUSIVE
-    let fechaMinima = new Date().toISOString().split('T')[0];
-    let fechaMaxima = new Date()
-    fechaMaxima.setDate(fechaMaxima.getDate() + 30);
-    let fechaMaximaFormateada = fechaMaxima.toISOString().split('T')[0]
-
-    //Seteo los valores minimos y maximos en el input Fecha
-    inputFecha.setAttribute('min', fechaMinima);
-    inputFecha.setAttribute('max', fechaMaximaFormateada);
-
 });
 
 
@@ -175,52 +168,76 @@ document.addEventListener('DOMContentLoaded', function () {
 let agendarLavado = function (event) {
     event.preventDefault();
 
-    //OBTENGO EL PARRAFO DE ERROR PARA PODER MANIPULARLO EN CASO DE HABER ALGO MAL
-    let pError = document.getElementById('pError')
-
-
     let inputNombre = document.getElementById("inputNombre").value;
     let inputTelefono = document.getElementById("inputTelefono").value;
-    let inputFecha = new Date(document.getElementById("inputFecha").value).toISOString().split('T')[0];
-    let inputHora = document.getElementById("inputHora").value;
+    let inputFecha = new Date(document.getElementById("datepicker").value).toISOString().split('T')[0];
+    let inputHora = parseInt(document.getElementById("timepicker").value);
     let inputTipo = parseInt(document.getElementById("selectTipo").value);
 
-    //SE DESCARGA LA ULTIMA VERSION DE LAS RESERVAS DEL LOCAL STORAGE
-    let reservasLocalStorage = JSON.parse(localStorage.getItem('reservas'))
 
-    //SE CREA EL CODIGO PARA ASIGNAR LA RESERVA NUEVA
-    let idReserva;
-    if (reservasLocalStorage === null) {
-        reservasLocalStorage = [];
-        idReserva = 0;
-    } else {
-        idReserva = reservasLocalStorage.length;
-    }
+    Swal.fire({
+        title: "Estas seguro??",
+        text: "Estas a punto de agendar un lavado!",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, agendar!"
+    }).then((result) => {
+        if (result.isConfirmed) {
 
-    //SE CREA EL OBJETO DE LA NUEVA RESERVA
-    let nuevaReserva = {
-        id: idReserva,
-        cliente: inputNombre,
-        telefono: inputTelefono,
-        fecha: inputFecha,
-        hora: inputHora,
-        tipo: inputTipo
+            //SE DESCARGA LA ULTIMA VERSION DE LAS RESERVAS DEL LOCAL STORAGE
+            let reservasLocalStorage = JSON.parse(localStorage.getItem('reservas'))
 
-    }
+            //SE CREA EL CODIGO PARA ASIGNAR LA RESERVA NUEVA
+            let idReserva;
+            if (reservasLocalStorage === null) {
+                reservasLocalStorage = [];
+                idReserva = 0;
+            } else {
+                idReserva = reservasLocalStorage.length;
+            }
 
-    //SE AGREGA AL ARRAY
-    reservasLocalStorage.push(nuevaReserva)
+            //SE CREA EL OBJETO DE LA NUEVA RESERVA
+            let nuevaReserva = {
+                id: idReserva,
+                cliente: inputNombre,
+                telefono: inputTelefono,
+                fecha: inputFecha,
+                hora: inputHora,
+                tipo: inputTipo
 
-    //SE ACTUALIZA EL LOCAL STORAGE CON LA INFORMACION NUEVA
-    localStorage.setItem('reservas', JSON.stringify(reservasLocalStorage));
+            }
 
-    alert('Reserva asignada! \n Codigo: ' + idReserva + '. \n Nombre: ' + inputNombre + '. \n Dia: ' + inputFecha + '. \n Hora: ' + inputHora)
+            //SE AGREGA AL ARRAY
+            reservasLocalStorage.push(nuevaReserva)
 
-    //SE LIMPIA EL FORM
-    document.getElementById("inputNombre").value = '';
-    document.getElementById("inputTelefono").value = '';
-    document.getElementById("inputFecha").value = new Date().toISOString().split('T')[0]; // Fecha del día
-    document.getElementById("inputHora").value = 9;
+            //SE ACTUALIZA EL LOCAL STORAGE CON LA INFORMACION NUEVA
+            localStorage.setItem('reservas', JSON.stringify(reservasLocalStorage));
+            Swal.fire({
+                title: "Agendado!",
+                text: "Reserva asignada! \n Codigo: " + idReserva + ". \n Nombre: " + inputNombre + ". \n Dia: " + inputFecha + ". \n Hora: " + inputHora,
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Aceptar"
+            }).then((result) => {
+                // La función then() se ejecuta cuando se hace clic en el botón "Aceptar" en SweetAlert
+                    // Recargar la página
+                    location.reload();
+            });
+        } else {
+            Swal.fire({
+                title: "Agenda Cancelada!",
+                text: "No guardamos los datos.",
+                icon: "info"
+            });
+        }
+        closeModal();
+
+    });
+
+
 
 
 };
@@ -238,38 +255,38 @@ function adminCMDInfo() {
     console.log("|  \x1b[32m'clsReservas'\x1b[0m      |  Remueve todas las reservas     |");
     console.log("=========================================================");
     console.log('Los comandos se ejecutan con adminCMD("comando")')
-    
+
 }
 
-function listarReservas(){
+function listarReservas() {
     let listaReservas = JSON.parse(localStorage.getItem('reservas'))
     listaReservas === null ? console.log('No hay registros') : console.table(listaReservas)
 }
 
-function borrarListaReservas(){
+function borrarListaReservas() {
     localStorage.clear('reservas');
     let listaReservas = JSON.parse(localStorage.getItem('reservas'))
     listaReservas === null ? console.log('No hay registros') : console.table(listaReservas)
 }
 
-function adminCMD(comando){
+function adminCMD(comando) {
     switch (comando) {
         case "comandos":
             //SE MUESTRAN LA LISTA DE COMANDOS
             console.log("Ejecutando comando list...");
             adminCMDInfo();
             break;
-        
+
         case "reservas":
             console.log("Ejecutando comando reservas...");
             listarReservas();
             break;
-    
+
         case "clsReservas":
             console.log("Ejecutando comando clsReservas...");
             borrarListaReservas();
             break;
-    
+
         default:
             console.log("Comando no reconocido");
             // Lógica para el caso por defecto
