@@ -169,7 +169,9 @@ let agendarLavado = function (event) {
     event.preventDefault();
 
     let inputNombre = document.getElementById("inputNombre").value;
+    let countrySelect = document.getElementById("countrySelect").value;
     let inputTelefono = document.getElementById("inputTelefono").value;
+    let numberComplete = countrySelect+ ' '+ inputTelefono;
     let inputFecha = new Date(document.getElementById("datepicker").value).toISOString().split('T')[0];
     let inputHora = parseInt(document.getElementById("timepicker").value);
     let inputTipo = parseInt(document.getElementById("selectTipo").value);
@@ -202,7 +204,7 @@ let agendarLavado = function (event) {
             let nuevaReserva = {
                 id: idReserva,
                 cliente: inputNombre,
-                telefono: inputTelefono,
+                telefono: numberComplete,
                 fecha: inputFecha,
                 hora: inputHora,
                 tipo: inputTipo

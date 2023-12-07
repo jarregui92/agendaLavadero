@@ -21,6 +21,7 @@
     <script src="./js/main.js" defer></script>
     <script src="./js/modal.js" defer></script>
     <script src="./js/validateHour.js" defer></script>
+    <script src="./js/countryNumberApi.js" defer></script>
 
 </head>
 
@@ -142,7 +143,8 @@
 
             <form action="#" class="form-modal" method="post" id="agendaLavadoForm">
                 <input type="text" id="inputNombre" name="inputNombre" placeholder="Nombre completo " required/>
-                <input type="number" id="inputTelefono" name="inputTelefono" placeholder="+598 99 999 999" required/>
+                <select id="countrySelect" class="input"></select>
+                <input type="number" id="inputTelefono" name="inputTelefono" placeholder="99 999 999" required/>
                 <label for="inputTelefono">Seleccione la fecha para su lavado</label>
                 <input type="text" id="datepicker" placeholder="Selecciona fecha">
                 <!-- <input type="date" name="inputFecha" id="inputFecha" required> -->
