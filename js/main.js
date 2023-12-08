@@ -1,23 +1,9 @@
+import siteConfig from '../siteConfig.js';
+
 //PRE CARGA DE VALORES PARA EL USO DE LA APLICACION
 document.addEventListener('DOMContentLoaded', function () {
     //CARGA DE VARIABLES PARA EL PRIMER USO DE LA APP
-    let listaVehiculos = [{
-            'id': 1,
-            'tipo': 'Camioneta',
-            'precio': 700
-        },
-        {
-            'id': 2,
-            'tipo': 'Auto',
-            'precio': 500
-        },
-        {
-            'id': 3,
-            'tipo': 'Moto',
-            'precio': 200
-        },
-    ];
-
+    let listaVehiculos = siteConfig.listaVehiculos;
     //SE OBTIENE EL FORMULARIO
     let formulario = document.querySelector("#formReservation");
 

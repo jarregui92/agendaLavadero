@@ -1,5 +1,6 @@
 // CONFIGURACION DEL HORARIO DE LA EMPRESA
-let businessHours = { open: "09:00", close: "18:00" };
+import siteConfig from '../siteConfig.js';
+let businessHours = siteConfig.businessHours;
 
 const datePicker = flatpickr("#datepicker", {
   enableTime: false,
