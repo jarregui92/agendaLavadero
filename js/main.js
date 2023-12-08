@@ -63,7 +63,7 @@ let agendarLavado = function (event) {
     let inputHora = parseInt(document.getElementById("timepicker").value);
     let inputTipo = parseInt(document.getElementById("selectVehicle").value);
 
-
+    //SE PREGUNTA SI SE DESEA AGENDAR EL LAVADO Y SE MUESTRA UN MENSAJE DE CONFIRMACION
     Swal.fire({
         title: "Estas seguro??",
         text: "Estas a punto de agendar un lavado!",
