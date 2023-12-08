@@ -1,5 +1,5 @@
-// Horario de apertura y cierre
-let horario = [{ apertura: "09:00", cierre: "18:00" }];
+// CONFIGURACION DEL HORARIO DE LA EMPRESA
+let businessHours = { open: "09:00", close: "18:00" };
 
 const datePicker = flatpickr("#datepicker", {
   enableTime: false,
@@ -8,26 +8,23 @@ const datePicker = flatpickr("#datepicker", {
   onChange: function(selectedDates) {
     // Obtener la fecha seleccionada
     let selectedDate = selectedDates[0].toISOString().split("T")[0];
-    let reservas;
-    let listaReservasLocalStorage = localStorage.getItem('reservas');
-    if(listaReservasLocalStorage){
-      reservas = JSON.parse(listaReservasLocalStorage);
+    let reservations;
+    let reservationsListLocalStorage = localStorage.getItem('reservations');
+    if(reservationsListLocalStorage){
+      reservations = JSON.parse(reservationsListLocalStorage);
     }else{
-      reservas = [];
+      reservations = [];
     }
     
     // Filtrar las reservas para la fecha seleccionada
-    let reservasFechaSeleccionada = reservas.filter(reserva => reserva.fecha === selectedDate);
+    let selectedDateReservations = reservations.filter(reserva => reserva.fecha === selectedDate);
 
     // Obtener las horas reservadas para esa fecha
-    let horasReservadas = reservasFechaSeleccionada.map(reserva => reserva.hora);
-
-    // Obtener el horario de apertura y cierre para la fecha seleccionada
-    let horarioFechaSeleccionada = horario[0]; // Tomamos el primer elemento del array
+    let reservationHours = selectedDateReservations.map(reserva => reserva.hora);
 
     // Obtener la hora de apertura y cierre
-    let horaInicio = parseInt(horarioFechaSeleccionada.apertura.split(":")[0], 10);
-    let horaFin = parseInt(horarioFechaSeleccionada.cierre.split(":")[0], 10);
+    let hourStart = parseInt(businessHours.open.split(":")[0], 10);
+    let hourEnd = parseInt(businessHours.close.split(":")[0], 10);
 
     // Habilitar el select
     let timePicker = document.getElementById('timepicker');
@@ -36,13 +33,13 @@ const datePicker = flatpickr("#datepicker", {
     // Limpiar y agregar opciones al select
     timePicker.innerHTML = '';
 
-    for (let i = horaInicio; i <= horaFin; i++) {
+    for (let i = hourStart; i <= hourEnd; i++) {
       let option = document.createElement('option');
       option.value = i;
       option.text = i < 10 ? `0${i}:00` : `${i}:00`;
 
       // Deshabilitar la opción si la hora está reservada
-      if (horasReservadas.includes(i)) {
+      if (reservationHours.includes(i)) {
         option.disabled = true;
         option.text += ' (Hora ocupada)';
       }
@@ -50,13 +47,4 @@ const datePicker = flatpickr("#datepicker", {
       timePicker.add(option);
     }
   }
-});
-
-// Evento para actualizar la hora seleccionada
-document.getElementById('timepicker').addEventListener('change', function() {
-  const selectedDate = datePicker.selectedDates[0].toISOString().split("T")[0];
-  const selectedHour = this.value;
-
-  // Puedes hacer algo con la fecha y hora seleccionadas
-  console.log(`Fecha y hora seleccionadas: ${selectedDate} ${selectedHour}:00`);
 });

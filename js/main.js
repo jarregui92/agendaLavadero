@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     //SE OBTIENE EL FORMULARIO
-    let formulario = document.querySelector("#agendaLavadoForm");
+    let formulario = document.querySelector("#formReservation");
 
     //SE CREA EL LISTENER PARA EL SUBMIT
     formulario.addEventListener("submit", agendarLavado);
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //SE CREA Y SE CARGA DEL LOCAL STORAGE LA LISTA DE RESERVAS
     let listaReservasArray;
-    let listaReservasLocalStorage = localStorage.getItem('reservas');
+    let listaReservasLocalStorage = localStorage.getItem('reservations');
     //SI LOCALSTORAGE YA ESTA CARGADO CON LA LISTA DE RESERVAS
     //SE PARSEA, DEL CASO CONTRARIO SE CARGA PARA EL USO
     if (listaReservasLocalStorage) {
@@ -51,14 +51,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //CARGA DEL SELECT DEL TIPO DE VEHICULO PARA LAVADO DEL MODAL
-    let selectTipo = document.getElementById('selectTipo')
+    let selectVehicle = document.getElementById('selectVehicle')
     listaVehiculosArray.forEach(vehiculo => {
         let option = document.createElement('option');
 
         option.value = vehiculo.id;
         option.text = vehiculo.tipo + ' - $' + vehiculo.precio;
 
-        selectTipo.appendChild(option);
+        selectVehicle.appendChild(option);
     });
 
 
@@ -69,13 +69,13 @@ document.addEventListener('DOMContentLoaded', function () {
 let agendarLavado = function (event) {
     event.preventDefault();
 
-    let inputNombre = document.getElementById("inputNombre").value;
+    let inputName = document.getElementById("inputName").value;
     let countrySelect = document.getElementById("countrySelect").value;
-    let inputTelefono = document.getElementById("inputTelefono").value;
-    let numberComplete = countrySelect+ ' '+ inputTelefono;
+    let inputPhone = document.getElementById("inputPhone").value;
+    let numberComplete = countrySelect+ ' '+ inputPhone;
     let inputFecha = new Date(document.getElementById("datepicker").value).toISOString().split('T')[0];
     let inputHora = parseInt(document.getElementById("timepicker").value);
-    let inputTipo = parseInt(document.getElementById("selectTipo").value);
+    let inputTipo = parseInt(document.getElementById("selectVehicle").value);
 
 
     Swal.fire({
@@ -90,7 +90,7 @@ let agendarLavado = function (event) {
         if (result.isConfirmed) {
 
             //SE DESCARGA LA ULTIMA VERSION DE LAS RESERVAS DEL LOCAL STORAGE
-            let reservasLocalStorage = JSON.parse(localStorage.getItem('reservas'))
+            let reservasLocalStorage = JSON.parse(localStorage.getItem('reservations'))
 
             //SE CREA EL CODIGO PARA ASIGNAR LA RESERVA NUEVA
             let idReserva;
@@ -104,7 +104,7 @@ let agendarLavado = function (event) {
             //SE CREA EL OBJETO DE LA NUEVA RESERVA
             let nuevaReserva = {
                 id: idReserva,
-                cliente: inputNombre,
+                cliente: inputName,
                 telefono: numberComplete,
                 fecha: inputFecha,
                 hora: inputHora,
@@ -116,10 +116,10 @@ let agendarLavado = function (event) {
             reservasLocalStorage.push(nuevaReserva)
 
             //SE ACTUALIZA EL LOCAL STORAGE CON LA INFORMACION NUEVA
-            localStorage.setItem('reservas', JSON.stringify(reservasLocalStorage));
+            localStorage.setItem('reservations', JSON.stringify(reservasLocalStorage));
             Swal.fire({
                 title: "Agendado!",
-                text: "Reserva asignada! \n Codigo: " + idReserva + ". \n Nombre: " + inputNombre + ". \n Dia: " + inputFecha + ". \n Hora: " + inputHora,
+                text: "Reserva asignada! \n Codigo: " + idReserva + ". \n Nombre: " + inputName + ". \n Dia: " + inputFecha + ". \n Hora: " + inputHora,
                 icon: "success",
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",

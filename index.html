@@ -29,9 +29,9 @@
     <header>
         <h2><a href="#">Car - Wash</a></h2>
         <nav>
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#lavados">Lavados</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
+            <li><a href="#aboutUs">Nosotros</a></li>
+            <li><a href="#wash">Lavados</a></li>
+            <li><a href="#testimonials">Testimonios</a></li>
         </nav>
     </header>
 
@@ -44,7 +44,7 @@
         </div>
     </section>
 
-    <section class="nosotros" id="nosotros">
+    <section class="aboutUs" id="aboutUs">
         <img src="./images/CarWash.svg" alt="Logo Empresa">
         <br>
         <p>"En nuestro auto lavado, nos especializamos en darle a tu vehículo el cuidado que se merece. Con servicios de
@@ -63,7 +63,7 @@
         </ul>
     </section>
 
-    <section class="packages" id="lavados">
+    <section class="packages" id="wash">
         <h3 class="title">Lavados</h3>
         <p>En nuestro auto lavado, empleamos jabones especiales y encerados de alta calidad para una limpieza completa,
             tanto interior como exterior. ¡Tu vehículo merece destacar y brillar!</p>
@@ -104,7 +104,7 @@
         </ul>
     </section>
 
-    <section class="testimonials" id="testimonios">
+    <section class="testimonials" id="testimonials">
         <h3 class="title">Testimonios de clientes:</h3>
         <hr>
         <p class="quote">Increíble servicio de limpieza interior. Mi auto no solo está impecable, sino que también se
@@ -141,24 +141,23 @@
                 </p>
             </div>
 
-            <form action="#" class="form-modal" method="post" id="agendaLavadoForm">
-                <input type="text" id="inputNombre" name="inputNombre" placeholder="Nombre completo " required/>
+            <form action="#" class="form-modal" method="post" id="formReservation">
+                <input type="text" id="inputName" name="inputName" placeholder="Nombre completo " required/>
                 <select id="countrySelect" class="input"></select>
-                <input type="number" id="inputTelefono" name="inputTelefono" placeholder="99 999 999" required/>
-                <label for="inputTelefono">Seleccione la fecha para su lavado</label>
+                <input type="number" id="inputPhone" name="inputPhone" placeholder="99 999 999" required/>
+                <label for="datepicker">Seleccione la fecha para su lavado</label>
                 <input type="text" id="datepicker" placeholder="Selecciona fecha">
-                <!-- <input type="date" name="inputFecha" id="inputFecha" required> -->
-                <label for="inputHora perror">Abierto de 9 a 18hs</label>
+                <label for="timepicker ">Abierto de 9 a 18hs</label>
                 <select id="timepicker" disabled class="input"></select>
-                <select name="selectTipo" id="selectTipo" class="input">
+                <select name="selectVehicle" id="selectVehicle" class="input">
                     <!-- SE CARGA CON JAVASCRIPT -->
                 </select>
-                <p id ="pError" class="error-text hidden"></p>
                 <button type="submit" class="btn btn-submit" >Agendar</button>
             </form>
         </section>
     </div>
 
+    <!-- ESTO VUELVE EL FONDO DIFUSO CUANDO SE ABRE EL MODAL -->
     <div class="overlay hidden"></div>
 
 </body>

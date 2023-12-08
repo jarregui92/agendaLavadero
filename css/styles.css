@@ -227,14 +227,14 @@ a .btn {
 	}
 }
 
-/*nosotros Section*/
+/*aboutUs Section*/
 
-.nosotros img{
+.aboutUs img{
 	width: 18rem;
 }
 
 
-.nosotros .grid li {
+.aboutUs .grid li {
 	height: 350px;
 	padding: 20px;
 	background-clip: content-box;
@@ -242,26 +242,26 @@ a .btn {
 	background-position: center;
 }
 
-.nosotros .grid li.small {
+.aboutUs .grid li.small {
 	flex-basis: 30%;
 }
 
-.nosotros .grid li.large {
+.aboutUs .grid li.large {
 	flex-basis: 70%;
 }
 
 @media (max-width: 1100px) {
 
-	.nosotros .grid li.small,
-	.nosotros .grid li.large {
+	.aboutUs .grid li.small,
+	.aboutUs .grid li.large {
 		flex-basis: 50%;
 	}
 }
 
 @media (max-width: 800px) {
 
-	.nosotros .grid li.small,
-	.nosotros .grid li.large {
+	.aboutUs .grid li.small,
+	.aboutUs .grid li.large {
 		flex-basis: 100%;
 	}
 }
@@ -395,7 +395,7 @@ footer p {
 	flex-direction: column;
 	justify-content: center;
 	gap: 0.4rem;
-	width: 450px;
+	width: 90%;
 	padding: 1.3rem;
 	min-height: 250px;
 	position: absolute;
@@ -404,6 +404,11 @@ footer p {
 	border: 1px solid #ddd;
 	border-radius: 15px;
 	z-index: 2;
+}
+@media (min-width: 490px){
+	.modal {
+		width: 450px;
+	}
 }
 
 .modal .flex {
