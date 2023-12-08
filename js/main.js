@@ -2,43 +2,20 @@ import siteConfig from '../siteConfig.js';
 
 //PRE CARGA DE VALORES PARA EL USO DE LA APLICACION
 document.addEventListener('DOMContentLoaded', function () {
-    //CARGA DE VARIABLES PARA EL PRIMER USO DE LA APP
-    let listaVehiculos = siteConfig.listaVehiculos;
+
     //SE OBTIENE EL FORMULARIO
     let formulario = document.querySelector("#formReservation");
 
     //SE CREA EL LISTENER PARA EL SUBMIT
     formulario.addEventListener("submit", agendarLavado);
 
-    //////////////////MANEJO DEL LOCAL STORAGE///////////////////
 
-    //SE CREA Y SE CARGA DEL LOCAL STORAGE LA LISTA DE VEHICULOS
-    let listaVehiculosArray;
-    let listaVehiculosLocalStorage = localStorage.getItem('listaVehiculos');
-    //SI LOCAL STORAGE YA ESTA CARGADO CON LA LISTA DE VEHICULOS
-    //SE PARSEA, DEL CASO CONTRARIO SE CARGA PARA EL USO
-    if (listaVehiculosLocalStorage) {
-        listaVehiculosArray = JSON.parse(listaVehiculosLocalStorage)
-    } else {
-        let listaVehiculosString = JSON.stringify(listaVehiculos);
-        localStorage.setItem('listaVehiculos', listaVehiculosString)
-        listaVehiculosArray = listaVehiculos;
-    }
-
-    //SE CREA Y SE CARGA DEL LOCAL STORAGE LA LISTA DE RESERVAS
-    let listaReservasArray;
-    let listaReservasLocalStorage = localStorage.getItem('reservations');
-    //SI LOCALSTORAGE YA ESTA CARGADO CON LA LISTA DE RESERVAS
-    //SE PARSEA, DEL CASO CONTRARIO SE CARGA PARA EL USO
-    if (listaReservasLocalStorage) {
-        listaReservasArray = JSON.parse(listaReservasLocalStorage);
-    } else {
-        listaReservasArray = [];
-    }
-
-    //CARGA DEL SELECT DEL TIPO DE VEHICULO PARA LAVADO DEL MODAL
+    //SE CREA Y SE CARGA LA LISTA DE VEHICULOS DISPONIBLES 
+    let listaVehiculos = siteConfig.listaVehiculos;
+    
+    //SE OBTIENE EL SELECT DEL TIPO DE VEHICULO DEL MODAL
     let selectVehicle = document.getElementById('selectVehicle')
-    listaVehiculosArray.forEach(vehiculo => {
+    listaVehiculos.forEach(vehiculo => {
         let option = document.createElement('option');
 
         option.value = vehiculo.id;
