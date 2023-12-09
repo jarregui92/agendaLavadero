@@ -52,19 +52,20 @@ const datePicker = flatpickr("#datepicker", {
     // SE LIMPIA EL SELECT POR SI TRAE INFORMACION ANTERIOR
     timePicker.innerHTML = '';
 
-
+    //SE OBTIENE LA HORA ACTUAL
     let currentHour = now.getHours();
-    let nowDate = new Date(now);
     
+    // SE ITERA SOBRE LAS HORAS DISPONIBLES ENTRE LA HORA DE APERTURA Y CIERRE
     for (let i = hourStart; i <= hourEnd; i++) {
         let option = document.createElement('option');
+        // ASIGNO EL VALOR DE LA OPCION OSEA LA HORA ACTUAL EN ESTA ITERACION
         option.value = i;
         // Se formatea el texto para la opción (si es menor a 10 agrega un 0 antes)
         option.text = i < 10 ? `0${i}:00` : `${i}:00`;
     
         // Condición actualizada: deshabilitar si la hora ya ha pasado hoy
         if (
-            (nowDate.toISOString().split("T")[0] === selectedDate && i <= currentHour) ||
+            (now.toISOString().split("T")[0] === selectedDate && i <= currentHour) ||
             reservationHours.includes(i)
         ) {
             option.disabled = true;
@@ -72,7 +73,6 @@ const datePicker = flatpickr("#datepicker", {
         }
     
         timePicker.add(option);
-
 
     }
   }
