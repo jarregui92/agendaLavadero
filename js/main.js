@@ -82,7 +82,7 @@ let agendarLavado = function (event) {
             localStorage.setItem('reservations', JSON.stringify(reservasLocalStorage));
             Swal.fire({
                 title: "Agendado!",
-                text: "Reserva asignada! \n Codigo: " + idReserva + ". \n Nombre: " + inputName + ". \n Dia: " + inputFecha + ". \n Hora: " + inputHora,
+                html: "Reserva asignada! <br> Codigo: " + idReserva + ". <br> Nombre: " + inputName + ". <br> Dia: " + inputFecha + ". <br> Hora: " + inputHora,
                 icon: "success",
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
