@@ -6,8 +6,7 @@ let scheduleConfiguration = siteConfig.scheduleConfiguration;
 
   //SE OBTIENE LA HORA ACTUAL Y SE LE SUMA 1 PARA QUE NO SE PUEDA AGENDAR CON MENOS DE UNA HORA DE ANTELACION
   let now = new Date();
-  let nowHour = now.getHours();
-  let minSelectableHour = nowHour + 1;
+  let minSelectableHour = now.getHours() + 1;
 
  //SE OBTIENE LA HORA ACTUAL Y SE LE SUMA 1 PARA QUE NO SE PUEDA AGENDAR CON MENOS DE UNA HORA DE ANTELACION
  let minDate = new Date(now);
@@ -53,20 +52,28 @@ const datePicker = flatpickr("#datepicker", {
     // SE LIMPIA EL SELECT POR SI TRAE INFORMACION ANTERIOR
     timePicker.innerHTML = '';
 
-    // SE ITERA SOBRE LAS HORAS DISPONIBLES Y CREA OPCIONES PARA EL SELECT
+
+    let currentHour = now.getHours();
+    let nowDate = new Date(now);
+    
     for (let i = hourStart; i <= hourEnd; i++) {
-      let option = document.createElement('option');
-      option.value = i;
-      // SE FORMATEA EL TEXTO PARA LA OPCION (SI ES MENOR A 10 AGREGA UN 0 ANTES)
-      option.text = i < 10 ? `0${i}:00` : `${i}:00`;
+        let option = document.createElement('option');
+        option.value = i;
+        // Se formatea el texto para la opción (si es menor a 10 agrega un 0 antes)
+        option.text = i < 10 ? `0${i}:00` : `${i}:00`;
+    
+        // Condición actualizada: deshabilitar si la hora ya ha pasado hoy
+        if (
+            (nowDate.toISOString().split("T")[0] === selectedDate && i <= currentHour) ||
+            reservationHours.includes(i)
+        ) {
+            option.disabled = true;
+            option.text += ' (Hora no disponible)';
+        }
+    
+        timePicker.add(option);
 
-      // SE DESHABILITA LA OPCION SI LA HORA ESTA RESERVADA Y SE AGREGA UN TEXTO AL LADO EXPLICANDO PQ NO PUEDE SER SELECCIONADA
-      if (reservationHours.includes(i) || i < minSelectableHour) {
-        option.disabled = true;
-        option.text += ' (Hora no disponible)';
-      }
 
-      timePicker.add(option);
     }
   }
 });
